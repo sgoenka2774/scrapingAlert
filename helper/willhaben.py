@@ -8,7 +8,13 @@ def filterNumber(number):
     for n in str(number).split('.'):
         num = num+n
     print(num)
-    return round(int(num)/30)
+    #checks for float inistance if true increases the value to 1+
+    value = int(num)/30
+
+    if isinstance(value,float):
+        value = int(value) + 1
+
+    return value
 
 def websiteWill(tag):
     new_ticket_name = []
@@ -38,7 +44,7 @@ def websiteWill(tag):
         print('timeout')
     if last_response.status_code == 200:
         list_soup = BeautifulSoup(last_response.text, 'html.parser')
-        for n in list_soup.findAll(class_= "Text-sc-10o2fdq-0 dphSxt"):
+        for n in list_soup.findAll('h3'):    #class_= "Text-sc-10o2fdq-0 dphSxt"
             new_ticket_name.append(n.text)
     print(len(new_ticket_name))
     return [number_of_ticket, new_ticket_name]
