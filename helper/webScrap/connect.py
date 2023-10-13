@@ -31,7 +31,6 @@ def connection(url):
         response = session.get(url)
     except:
         print('Error while creating session')
-
     # If the server sets new cookies, the session will automatically update them
     # Close the session when done
     session.close()
