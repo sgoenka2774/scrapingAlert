@@ -3,4 +3,4 @@ __pycache__/
 venv/
 bin/
 lib/
-config.ini/
+config.ini
