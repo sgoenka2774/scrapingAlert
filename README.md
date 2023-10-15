@@ -12,7 +12,14 @@ ScrapingAlert is a Python script that monitors and scrapes data from various web
 
 pip install -r requirements.txt
 
-First Run 
-```bash
-python main.py --new telegram-token
 
+2. First Run 
+   ```bash
+   python main.py --new telegram-token
+
+3. Telgram token
+
+   Open the Telegram app and search for the "BotFather" (username: @BotFather).
+   Start a chat with BotFather.
+   Use the /newbot command to create a new bot. Follow the instructions provided by BotFather.
+   Once your bot is created, BotFather will provide you with a unique API token. Save this token; you'll need it for your Python code.
