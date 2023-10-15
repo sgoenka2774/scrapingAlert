@@ -4,10 +4,8 @@ from bs4 import BeautifulSoup
 
 def filterNumber(number):
     num = ''
-    print(str(number).split('.'))
     for n in str(number).split('.'):
         num = num+n
-    print(num)
     #checks for float inistance if true increases the value to 1+
     value = int(num)/30
 
@@ -38,7 +36,6 @@ def websiteWill(tag):
     url_last_page = f'&page={page_num}&adSeparatorSeen=false'
 
     try:
-        print(url+url_last_page)
         last_response = requests.get(url+url_last_page, timeout=5)
     except TimeoutError:
         print('timeout')
@@ -46,7 +43,5 @@ def websiteWill(tag):
         list_soup = BeautifulSoup(last_response.text, 'html.parser')
         for n in list_soup.findAll('h3'):    #class_= "Text-sc-10o2fdq-0 dphSxt"
             new_ticket_name.append(n.text)
-    print(len(new_ticket_name))
     return [number_of_ticket, new_ticket_name]
 
-print(websiteWill('ticket'))

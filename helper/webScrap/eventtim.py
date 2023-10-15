@@ -1,24 +1,36 @@
 import re
-from connect import connection
+import time
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-def filterNumber(num):
+def filterNumber(number):
+    num = ''
+    for n in number:
+        try:
+            if int(n) >= 0:
+                num = num + str(n)
+        except:
+            continue
     return int(num)
 
-def websiteEventim(tag):
-    page_num = 0
-    response = connection(f"https://www.eventim.de/search/?affiliate=EVE&searchterm={tag}&tab=1")
-    if response['status_code'] == 200:
-        soup = BeautifulSoup(response['text'], 'html.parser')
-        count_in_text = soup.find_all(lambda tag: tag.name == 'div' and tag.get('aria-live') == 'assertive')
 
-        print(count_in_text)
-        #number_of_ticket = re.findall(r'\d+',count_in_text)[0]
-        #page_num = filterNumber(number_of_ticket)
+def eventtim(tag):
+    driver = webdriver.Chrome()
+    driver.get(f"https://www.eventim.de/search/?affiliate=EVE&searchterm={tag}")
+    time.sleep(5)
+    html = driver.page_source
+    script = '''return document.querySelectorAll("div[class='search-result-content']")[0].outerText'''
+    text = driver.execute_script(script)
+    html = driver.page_source
+    soup = BeautifulSoup(html,"html.parser")
+    list_ticket_name = soup.find_all("div", class_="event-listing-city theme-text-color")
+    new_ticket_name = []
+    for n in list_ticket_name:
+        new_ticket_name.append(n.text)
+    number = filterNumber(text)
 
-    #print(page_num)
+    return [number, new_ticket_name]
 
-
-
-
-websiteEventim('ticket')
