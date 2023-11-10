@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from .connect import connection
+from connect import connection
 import re
 
 
@@ -9,15 +9,14 @@ def filterNumber(number):
         num = num+n
     return num
 
-def websiteklein(tag):
+def websiteklein(url):
     response = 0
     new_ticket_name = []
     last_response = 0
     number_of_ticket = 0
 
     try:
-        response = connection(
-        f"https://www.kleinanzeigen.de/s-eintrittskarten-tickets/{tag}/k0c231")
+        response = connection(url)
     except TimeoutError:
         print('timeout')
 
@@ -33,4 +32,6 @@ def websiteklein(tag):
 
     return [page_num, new_ticket_name]
 
+print(websiteklein('https://www.kleinanzeigen.de/s-eintrittskarten-tickets/rickert/c231l11752'))
 
+#good to go

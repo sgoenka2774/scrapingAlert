@@ -14,13 +14,11 @@ def filterNumber(number):
 
     return value
 
-def websiteWill(tag):
+def websiteWill(url):
     new_ticket_name = []
     number_of_ticket = 0
     response = 'a'
     last_response = 'a'
-    url = f'https://www.willhaben.at/iad/kaufen-und-verkaufen/marktplatz/tickets-gutscheine-6700?sfId=a1a0c9c8-8c17-4a3c-bc5f-2bdf3e9c6295&rows=30&isNavigation=true&keyword={tag}'
-
     try:
         response = requests.get(url, timeout=5)
 
@@ -45,3 +43,6 @@ def websiteWill(tag):
             new_ticket_name.append(n.text)
     return [number_of_ticket, new_ticket_name]
 
+print(websiteWill('https://www.willhaben.at/iad/kaufen-und-verkaufen/marktplatz?sfId=43577eec-a5e9-42d8-84a4-e493265e3f62&isNavigation=true&isISRL=true&keyword=ticket'))
+
+#good to go
